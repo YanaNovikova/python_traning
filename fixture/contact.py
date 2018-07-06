@@ -49,7 +49,6 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.return_homepage()
-        self.contact_cache = None
 
     def create2(self, contact):
         wd = self.app.wd
@@ -60,16 +59,16 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.return_homepage()
-        self.contact_cache = None
-
-    def delete_first_contact(self):
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # submit edit
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
         self.return_home()
-        self.contact_cache = None
+
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
@@ -82,7 +81,6 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[1]").click()
         self.return_homepage()
-        self.contact_cache = None
 
     def return_homepage(self):
         wd = self.app.wd
@@ -93,35 +91,37 @@ class ContactHelper:
         if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("Add")) > 0):
             wd.find_element_by_link_text("home").click()
 
-    def modify_first_contact(self, new_contact_data):
+    def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
-        self.select_first_contact()
-        #open modification form
+        self.select_contact_by_index(index)
+        # open modification form
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # fill group form
         self.fill_contact_form(new_contact_data)
-        #submit modification
+        # submit modification
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[1]").click()
         self.return_homepage()
-        self.contact_cache = None
+
+    def modify_first_contact(self):
+        self.modify_contact_by_index(0)
+
+    def select_contact_by_index(self,index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def select_first_contact(self):
-        wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(0)
 
     def count(self):
         wd = self.app.wd
         return len(wd.find_elements_by_name("selected[]"))
 
-    contact_cache = None
-
     def get_contact_list(self):
-        if self.contact_cache is None:
-            wd = self.app.wd
-            self.contact_cache = []
-            for table in wd.find_elements_by_name("entry"):
-                element = table.find_elements_by_css_selector('td')
-                text = element[1].text
-                id = element[0].find_element_by_name("selected[]").get_attribute("id")
-                self.contact_cache.append(Contact(lastname=text, firstname=text, id=id))
-        return list(self.contact_cache)
+        wd = self.app.wd
+        contacts = []
+        for table in wd.find_elements_by_name("entry"):
+            element = table.find_elements_by_css_selector('td')
+            text = element[1].text
+            id = element[0].find_element_by_name("selected[]").get_attribute("id")
+            contacts.append(Contact(lastname=text, firstname=text, id=id))
+        return contacts
