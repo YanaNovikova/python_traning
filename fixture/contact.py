@@ -111,9 +111,10 @@ class ContactHelper:
     def get_contact_list(self):
         wd = self.app.wd
         contacts = []
-        for element in wd.find_elements_by_css_selector('tr.odd'):
+        for element in wd.find_elements_by_name("entry"):
+            wd.find_elements_by_css_selector('td')
             text = element.text
             id = element.find_element_by_name("selected[]").get_attribute("id")
-            contacts.append(Contact(firstname=text, middlename=text, id=id))
+            contacts.append(Contact(lastname=text, firstname=text, id=id))
         return contacts
 
