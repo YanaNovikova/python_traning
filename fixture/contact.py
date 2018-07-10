@@ -65,20 +65,19 @@ class ContactHelper:
     def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.select_contact_by_index(index)
-        # submit edit
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
+        # submit delete
+        wd.find_element_by_xpath("//div[@id='content']/form[@name='MainForm']/div[@class='left']/input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
         self.return_home()
         self.contact_cache = None
 
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
-    def edit_first_contact(self, contact):
+    def edit_first_contact(self, index, contact):
         wd = self.app.wd
         self.select_first_contact()
-        # submit edit
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.open_modification_form(index)
         self.fill_contact_form(contact)
         wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[1]").click()
         wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[1]").click()
@@ -98,15 +97,16 @@ class ContactHelper:
 
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
-        self.select_contact_by_index(index)
-        # open modification form
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        # fill group form
+        self.open_modification_form(index)
         self.fill_contact_form(new_contact_data)
         # submit modification
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[1]").click()
         self.return_homepage()
         self.contact_cache = None
+
+    def open_modification_form(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")[index].click()
 
     def modify_first_contact(self):
         self.modify_contact_by_index(0)
@@ -130,7 +130,8 @@ class ContactHelper:
             self.contact_cache = []
             for table in wd.find_elements_by_name("entry"):
                 element = table.find_elements_by_css_selector('td')
-                text = element[1].text
+                lastname = element[1].text
+                firstname = element[2].text
                 id = element[0].find_element_by_name("selected[]").get_attribute("id")
-                self.contact_cache.append(Contact(lastname=text, firstname=text, id=id))
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id))
         return list(self.contact_cache)
