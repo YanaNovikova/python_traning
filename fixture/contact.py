@@ -131,6 +131,7 @@ class ContactHelper:
     def get_contact_list(self):
         if self.contact_cache is None:
             wd = self.app.wd
+            self.return_home()
             self.contact_cache = []
             for table in wd.find_elements_by_name('entry'):
                 element = table.find_elements_by_css_selector('td')
