@@ -167,6 +167,7 @@ class ContactHelper:
         cell = row.find_elements_by_tag_name("td")[7]
         cell.find_element_by_tag_name("a").click()
 
+
     def open_view_by_index(self, index):
         wd = self.app.wd
         self.return_home()
