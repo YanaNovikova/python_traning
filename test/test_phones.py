@@ -5,9 +5,9 @@ from random import randrange
 def test_phones_on_homepage(app, db):
     old_contacts = db.get_contact_list()
     #index = randrange(len(old_contacts))
-    for id in (old_contacts):
-        contact_from_homepage = db.get_contact_list()[id]
-        contact_from_edit_page = app.contact.get_contact_info_from_edit_page(id)
+    for gid in (old_contacts):
+        contact_from_homepage = db.get_contact_list()[gid]
+        contact_from_edit_page = app.contact.get_contact_info_from_edit_page(gid)
         assert contact_from_homepage.all_phones_from_homepage == merge_phones_like_on_homepage(contact_from_edit_page)
 
 

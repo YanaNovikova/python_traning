@@ -198,7 +198,7 @@ class ContactHelper:
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone, work=workphone,
                        mobile=mobilephone, phone2=phone2, email=email, email2=email2, email3=email3, address=address)
 
-    def get_contact_info_from_edit_page(self):
+    def get_contact_info_from_edit_page(self, id):
         wd = self.app.wd
         self.open_edit(id)
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
