@@ -227,13 +227,14 @@ class ContactHelper:
                        mobile=mobilephone, phone2=phone2)
 
 
-    def add_contact_to_group(self, index):
+    def add_contact_to_group(self, index,id):
         wd = self.app.wd
         self.return_home()
         wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_name("to_group").click()
-        wd.find_element_by_css_selector("option[value='109']").click()
+        wd.find_element_by_css_selector("option[value='%s']" % id).click()
         wd.find_element_by_name("add").click()
+
         #wd.find_element_by_link_text("group page \"\"").click()
         #wd.find_element_by_link_text("home").click()
 
