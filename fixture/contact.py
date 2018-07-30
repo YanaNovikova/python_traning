@@ -221,6 +221,8 @@ class ContactHelper:
         wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
         if ORMFixture.get_contacts_in_group is None:
             wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
+            wd.find_elements_by_name("selected[]")[index].click()
+            wd.find_element_by_name("remove").click()
         else:
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("remove").click()
