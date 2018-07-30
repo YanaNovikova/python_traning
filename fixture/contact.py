@@ -209,12 +209,13 @@ class ContactHelper:
         contact = wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_name("to_group").click()
         wd.find_element_by_css_selector("option[value='%s']" % id).click()
-        if contact != ORMFixture.get_contacts_in_group:
-            wd.find_element_by_name("add").click()
-        else:
+        if contact == ORMFixture.get_contacts_in_group:
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("to_group").click()
             wd.find_element_by_css_selector("option[value='%s']" % id).click()
+        else:
+            wd.find_element_by_name("add").click()
+
 
         #wd.find_element_by_link_text("group page \"\"").click()
         #wd.find_element_by_link_text("home").click()
