@@ -25,8 +25,8 @@ class Contact:
         self.address2 = address2
         self.phone2 = phone2
         self.notes = notes
-        self.all_phones_from_homepage=all_phones_from_homepage
-        self.all_emails_from_homepage=all_emails_from_homepage
+        self.all_phones_from_homepage = all_phones_from_homepage
+        self.all_emails_from_homepage = all_emails_from_homepage
         self.id = id
 
     def __repr__(self):

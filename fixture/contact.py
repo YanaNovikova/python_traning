@@ -1,6 +1,6 @@
 from model.contact import Contact
 import re
-
+from fixture.orm import ORMFixture
 
 class ContactHelper:
 
@@ -167,13 +167,6 @@ class ContactHelper:
         cell = row.find_elements_by_tag_name("td")[7]
         cell.find_element_by_tag_name("a").click()
 
-    def open_edit(self, id):
-        wd = self.app.wd
-        self.return_home()
-        row = wd.find_elements_by_name("entry")[id]
-        cell = row.find_elements_by_tag_name("td")[7]
-        cell.find_element_by_tag_name("a").click()
-
     def open_view_by_index(self, index):
         wd = self.app.wd
         self.return_home()
@@ -181,26 +174,9 @@ class ContactHelper:
         cell = row.find_elements_by_tag_name("td")[6]
         cell.find_element_by_tag_name("a").click()
 
-    def get_contact_info_from_edit_page_by_index(self, index):
+    def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
         self.open_edit_by_index(index)
-        lastname = wd.find_element_by_name("lastname").get_attribute("value")
-        firstname = wd.find_element_by_name("firstname").get_attribute("value")
-        id = wd.find_element_by_name("id").get_attribute("value")
-        homephone = wd.find_element_by_name("home").get_attribute("value")
-        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
-        workphone = wd.find_element_by_name("work").get_attribute("value")
-        phone2 = wd.find_element_by_name("phone2").get_attribute("value")
-        email = wd.find_element_by_name("email").get_attribute("value")
-        email2 = wd.find_element_by_name("email").get_attribute("value")
-        email3 = wd.find_element_by_name("email").get_attribute("value")
-        address = wd.find_element_by_name("address").get_attribute("value")
-        return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone, work=workphone,
-                       mobile=mobilephone, phone2=phone2, email=email, email2=email2, email3=email3, address=address)
-
-    def get_contact_info_from_edit_page(self, id):
-        wd = self.app.wd
-        self.open_edit(id)
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
@@ -230,10 +206,15 @@ class ContactHelper:
     def add_contact_to_group(self, index,id):
         wd = self.app.wd
         self.return_home()
-        wd.find_elements_by_name("selected[]")[index].click()
+        contact = wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_name("to_group").click()
         wd.find_element_by_css_selector("option[value='%s']" % id).click()
-        wd.find_element_by_name("add").click()
+        if contact != ORMFixture.get_contacts_in_group:
+            wd.find_element_by_name("add").click()
+        else:
+            wd.find_elements_by_name("selected[]")[index].click()
+            wd.find_element_by_name("to_group").click()
+            wd.find_element_by_css_selector("option[value='%s']" % id).click()
 
         #wd.find_element_by_link_text("group page \"\"").click()
         #wd.find_element_by_link_text("home").click()
