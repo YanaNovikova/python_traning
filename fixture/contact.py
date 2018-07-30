@@ -202,21 +202,29 @@ class ContactHelper:
         return Contact(home=homephone, work=workphone,
                        mobile=mobilephone, phone2=phone2)
 
-
-    def add_contact_to_group(self, index,id):
+    def add_contact_to_group(self, index, id):
         wd = self.app.wd
         self.return_home()
         contact = wd.find_elements_by_name("selected[]")[index].click()
-        wd.find_element_by_name("to_group").click()
-        wd.find_element_by_css_selector("option[value='%s']" % id).click()
-        if contact == ORMFixture.get_contacts_in_group:
+        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % id).click()
+        if contact != ORMFixture.get_contacts_in_group:
+            wd.find_element_by_name("add").click()
+        else:
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("to_group").click()
             wd.find_element_by_css_selector("option[value='%s']" % id).click()
+        self.contact_cache = None
+
+    def delete_contact_to_group(self, index, id):
+        wd = self.app.wd
+        self.return_home()
+        wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
+        if ORMFixture.get_contacts_in_group is None:
+            wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
         else:
-            wd.find_element_by_name("add").click()
-
-
-        #wd.find_element_by_link_text("group page \"\"").click()
+            wd.find_elements_by_name("selected[]")[index].click()
+            wd.find_element_by_name("remove").click()
+        self.contact_cache = None
+        #
         #wd.find_element_by_link_text("home").click()
 
