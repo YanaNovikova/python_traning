@@ -209,14 +209,11 @@ class ContactHelper:
         wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % id).click()
         if contact != ORMFixture.get_contacts_in_group:
             wd.find_element_by_name("add").click()
-        elif contact == ORMFixture.get_contacts_in_group:
-            contact.create1(Contact(firstname="1", middlename="1", lastname="1", nickname="1", title="1", company="1", address="1",
-                        home="1", mobile="1", work="1", fax="1", email="1", email2="1", email3="1", homepage="1",
-                        byear="2000", address2="1", phone2="1", notes="1"))
         else:
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("to_group").click()
             wd.find_element_by_css_selector("option[value='%s']" % id).click()
+        self.return_home()
         self.contact_cache = None
 
     def delete_contact_to_group(self, index, id):
@@ -224,17 +221,14 @@ class ContactHelper:
         self.return_home()
         wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
         if ORMFixture.get_contacts_in_group is None:
-            wd.find_element_by_xpath("//select[@name='group']/option[@value='']").click()
-            wd.find_elements_by_name("selected[]")[index].click()
-            wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % id).click()
-            wd.find_element_by_name("add").click()
             wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("remove").click()
         else:
             wd.find_elements_by_name("selected[]")[index].click()
             wd.find_element_by_name("remove").click()
+        self.return_home()
+        wd.find_element_by_xpath("//select[@name='group']/option[@value='']").click()
         self.contact_cache = None
-        #
-        #wd.find_element_by_link_text("home").click()
+
 
