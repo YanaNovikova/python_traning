@@ -16,7 +16,7 @@ def test_LFA_on_viewpage(app):
     assert contact_from_homepage.address == clear(contact_from_edit_page.address)
 
 
-def test_LFA_on_viewpage_all(app):
+def test_LFA_on_homepage_all(app):
     db_contacts = dat.get_contact_list()
     contact_from_homepage = app.contact.get_contact_list()
     list1 = sorted(db_contacts, key=Contact.id_max)
