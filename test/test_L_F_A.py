@@ -6,7 +6,7 @@ from model.contact import Contact
 dat = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 
 
-def test_phones_on_viewpage(app):
+def test_LFA_on_viewpage(app):
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))
     contact_from_homepage = app.contact.get_contact_list()[index]
@@ -16,7 +16,7 @@ def test_phones_on_viewpage(app):
     assert contact_from_homepage.address == clear(contact_from_edit_page.address)
 
 
-def test_phones_on_viewpage_all(app):
+def test_LFA_on_viewpage_all(app):
     db_contacts = dat.get_contact_list()
     contact_from_homepage = app.contact.get_contact_list()
     list1 = sorted(db_contacts, key=Contact.id_max)
