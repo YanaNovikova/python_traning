@@ -1,0 +1,53 @@
+{
+  "uid" : "373a3a76b431fe90",
+  "name" : "test_add_group[None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ]",
+  "title" : "Test add group [None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ]",
+  "time" : {
+    "start" : 1534415138228,
+    "stop" : 1534415139336,
+    "duration" : 1108
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 0
+  },
+  "failure" : {
+    "message" : "AssertionError: assert [1:g;g;g, 2:;...qONw3 sI, ...] == [1:g;g;g, 2:;;...qONw3 sI, ...]\n  Left contains more items, first extra item: None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ\n  Use -v to get the full diff",
+    "stackTrace" : "app = <fixture.application.Application object at 0x04F909F0>\ndb = <fixture.db.Dbfixture object at 0x04F90890>\njson_groups = None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ\n\n    def test_add_group(app, db, json_groups):\n        group = json_groups\n        old_groups = db.get_group_list()\n        app.group.create(group)\n        new_groups = db.get_group_list()\n        old_groups.append(group)\n>       assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)\nE       AssertionError: assert [1:g;g;g, 2:;...qONw3 sI, ...] == [1:g;g;g, 2:;;...qONw3 sI, ...]\nE         Left contains more items, first extra item: None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ\nE         Use -v to get the full diff\n\ntest\\test_add_group.py:11: AssertionError"
+  },
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "FAILED",
+  "testId" : null,
+  "suite" : {
+    "uid" : "695b48d6aecaf24f",
+    "name" : "test.test_add_group",
+    "title" : "Test add group"
+  },
+  "steps" : [ ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-1L24M9M"
+  }, {
+    "name" : "thread",
+    "value" : "14824-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "suite-name",
+    "value" : "test.test_add_group"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  } ],
+  "parameters" : [ ]
+}

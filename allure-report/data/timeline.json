@@ -1,0 +1,75 @@
+{
+  "hosts" : [ {
+    "title" : "DESKTOP-1L24M9M",
+    "threads" : [ {
+      "title" : "9012-MainThread",
+      "testCases" : [ {
+        "uid" : "8512aa498c694e80",
+        "name" : "test_add_group[None:;;]",
+        "title" : "Test add group [None:;;]",
+        "time" : {
+          "start" : 1534415778397,
+          "stop" : 1534415784867,
+          "duration" : 6470
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "6506bcc174edbc8",
+        "name" : "test_add_group[None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ]",
+        "title" : "Test add group [None:name M;headerrzq}v:D'8]5g# U; b;footerpmoZ]",
+        "time" : {
+          "start" : 1534415784868,
+          "stop" : 1534415786052,
+          "duration" : 1184
+        },
+        "severity" : "NORMAL",
+        "status" : "FAILED"
+      }, {
+        "uid" : "104101b21dd14cbc",
+        "name" : "test_add_group[None:nameH;header4oGT9%En:{ #e;footerd;@ p1.sWGBCj]",
+        "title" : "Test add group [None:nameH;header4oGT9%En:{ #e;footerd;@ p1.sWGBCj]",
+        "time" : {
+          "start" : 1534415786053,
+          "stop" : 1534415787149,
+          "duration" : 1096
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "69b8462ab1aaeac0",
+        "name" : "test_add_group[None:nameJ(8U~;header;footerz*\"N%Fv ]",
+        "title" : "Test add group [None:nameJ(8U~;header;footerz*\"N%Fv ]",
+        "time" : {
+          "start" : 1534415787150,
+          "stop" : 1534415788219,
+          "duration" : 1069
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "a90c937120b14efb",
+        "name" : "test_add_group[None:name;header9O `rNh5SS6 B ;footer]",
+        "title" : "Test add group [None:name;header9O `rNh5SS6 B ;footer]",
+        "time" : {
+          "start" : 1534415788220,
+          "stop" : 1534415789285,
+          "duration" : 1065
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "dfd16d53c50398c3",
+        "name" : "test_add_group[None:namevrw 0\\\\ kW;headerO;footer<X;IqONw3 sI]",
+        "title" : "Test add group [None:namevrw 0\\\\ kW;headerO;footer<X;IqONw3 sI]",
+        "time" : {
+          "start" : 1534415789286,
+          "stop" : 1534415790723,
+          "duration" : 1437
+        },
+        "severity" : "NORMAL",
+        "status" : "FAILED"
+      } ]
+    } ]
+  } ]
+}
